@@ -137,7 +137,7 @@ nav a:hover { color: var(--accent-blue); }
    3. القسم الرئيسي (Hero Section)
    ========================================= */
 .hero.dark-section {
-    background: linear-gradient(rgba(5, 5, 5, 0.30), rgba(5, 5, 5, 0.98)), url('https://ijn12hoh65.ufs.sh/f/gCdr8Ko1IyUJaWJ3TLkXPIJ5uHrcU0ZMVSRbsBytFgwYviTq') !important;
+    background: linear-gradient(rgba(5, 5, 5, 0.30), rgba(5, 5, 5, 0.98)), url('images/bg.png') !important;
     background-size: cover !important; 
     background-position: center top !important; 
     background-attachment: fixed !important; 
@@ -545,4 +545,5 @@ nav a:hover { color: var(--accent-blue); }
 
 @media (min-width: 1024px) {
     .header-logo { height: 65px; }
+
 }
