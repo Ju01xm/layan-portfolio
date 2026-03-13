@@ -527,31 +527,64 @@ nav a:hover { color: var(--accent-blue); }
 }
 
 /* =========================================
-   9. التجاوب مع الشاشات (Responsive)
-   ========================================= */
-
+   تجاوب الجوال
+========================================= */
 @media (max-width: 768px) {
-    /* إجبار الهيرو على التوسط وعدم التداخل */
+    /* 1. قفل الشاشة ومنعها من التمدد لليمين واليسار */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    /* 2. ترتيب الهيدر ليكون عمودي وفي المنتصف بدل ما يطلع بره الشاشة */
+    header {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 15px !important;
+        padding: 20px 10px !important;
+        text-align: center;
+        width: 100% !important;
+    }
+
+    /* ترتيب الروابط (Home, About me...) ليتوسطوا الشاشة */
+    nav {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    /* توسيط أزرار Contact me و عربي */
+    header > div[style] {
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    /* 3. تنزيل قسم الهيرو تحت عشان الهيدر ما يغطي عليه */
     .hero.dark-section {
-        padding-top: 140px !important; 
+        padding-top: 240px !important; /* مساحة كافية للهيدر */
         padding-bottom: 50px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
-    /* تصغير العناوين عشان ما تطلع بره الشاشة */
-    .hero h1 { 
-        font-size: 26px !important; 
-        line-height: 1.2 !important;
-    }
-    .hero h2 { 
-        font-size: 18px !important; 
-    }
+    /* 4. تصغير الخطوط لتناسب الشاشة */
+    .hero h1 { font-size: 6.5vw !important; margin-top: 10px;}
+    .hero h2 { font-size: 4.5vw !important; margin-bottom: 30px;}
 
-    /* السطر الواحد السحري - تأكدي من هذه القيم */
+    /* 5. إبقاء زر التواصل والأيقونات في سطر واحد ومصغرة بشكل أنيق */
     .hero-actions {
         display: flex !important;
-        flex-direction: row !important; /* جنب بعض */
-        flex-wrap: nowrap !important;   /* ممنوع ينزلون تحت */
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
         justify-content: center !important;
+        align-items: center !important;
         gap: 8px !important;
         width: 100% !important;
     }
@@ -560,10 +593,20 @@ nav a:hover { color: var(--accent-blue); }
         padding: 8px 12px !important;
         font-size: 12px !important;
         white-space: nowrap !important;
+        border-radius: 15px !important;
     }
 
-    .social-icon {
-        width: 32px !important;
-        height: 32px !important;
+    .social-squares { gap: 6px !important; }
+    .social-icon { width: 32px !important; height: 32px !important; flex-shrink: 0 !important; }
+    .social-icon svg { width: 14px !important; height: 14px !important; }
+
+    /* 6. ترتيب قسم الخدمات (1,2,3) ليكون مرتب ולא عشوائي */
+    .services-row {
+        gap: 20px !important;
+        justify-content: center !important;
+    }
+    .service-item {
+        width: 40% !important; /* يخلي كل اثنين جنب بعض بدل العشوائية */
+        text-align: center;
     }
 }
