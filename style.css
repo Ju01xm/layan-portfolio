@@ -529,46 +529,67 @@ nav a:hover { color: var(--accent-blue); }
 /* =========================================
    9. التجاوب مع الشاشات (Responsive)
    ========================================= */
+
 @media (max-width: 768px) {
-    /* تصغير القسم العلوي قليلاً ليعطي مساحة */
+    /* 1. ضبط مساحة الهيرو وتوسيط المحتوى */
     .hero.dark-section {
-        padding: 7rem 1rem 3rem 1rem !important;
+        padding: 120px 20px 50px 20px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
-    /* إجبار العناصر على البقاء في سطر واحد (نفس شكل الويب) */
+    /* 2. منع تداخل أزرار الهيدر (Contact me / عربي) */
+    .hero-btns {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px; /* دفع النص للأسفل لكي لا يتصادموا */
+    }
+
+    /* 3. تصغير النصوص بشكل متناسق مع الشاشة */
+    .hero h1 { 
+        font-size: 7vw !important; /* حجم الخط يعتمد على عرض الشاشة */
+        margin-top: 20px;
+    }
+    .hero h2 { 
+        font-size: 5vw !important; 
+        margin-bottom: 30px;
+    }
+
+    /* 4. "المسطرة": الحفاظ على السطر الواحد للأزرار السفلية */
     .hero-actions {
         display: flex !important;
-        flex-direction: row !important; /* جنب بعض */
-        flex-wrap: nowrap !important;   /* ممنوع النزول لسطر جديد */
-        justify-content: center;        /* توسيط في نصف الشاشة */
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center;
         align-items: center;
-        gap: 8px; /* مسافة صغيرة جداً بين الزر والأيقونات */
+        gap: 2vw; /* مسافة مرنة بين العناصر */
         width: 100%;
+        margin-top: 20px;
     }
 
-    /* تصغير زر التواصل ليتناسب مع السطر */
+    /* 5. موازنة حجم زر Get in Touch مع الأيقونات */
     .btn-outline {
-        padding: 8px 15px !important; /* تصغير الحشوة الداخلية */
-        font-size: 11px !important;    /* تصغير الخط */
+        padding: 10px 15px !important;
+        font-size: 3vw !important; /* خط مرن */
         white-space: nowrap !important;
-        border-radius: 15px;
+        border-width: 1px !important;
     }
 
-    /* تصغير المربعات البيضاء (الأيقونات) */
-    .social-squares {
-        display: flex;
-        gap: 5px; /* تقليل المسافة بين المربعات */
-    }
-
+    /* 6. ضبط حجم مربعات السوشيال ميديا */
     .social-icon {
-        width: 28px !important;  /* حجم صغير جداً للمربع */
-        height: 28px !important;
-        border-radius: 5px;
+        width: 35px !important;
+        height: 35px !important;
+        flex-shrink: 0; /* منع المربع من الانكماش */
     }
 
-    /* تصغير الأيقونات نفسها داخل المربعات */
-    .social-icon svg {
-        width: 14px !important;
-        height: 14px !important;
+    /* 7. ترتيب قسم الخدمات تحت بعضه بوضوح */
+    .services-row {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
     }
 }
