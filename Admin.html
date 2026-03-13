@@ -266,6 +266,26 @@
         font-size: 1.1rem;
     }
 }
+        @media (max-width: 768px) {
+    body {
+        zoom: 0.9; /* تصغير طفيف للوحة التحكم لتناسب اليد */
+    }
+
+    .admin-container {
+        display: block; /* يلغي ضغط العناصر الجانبية */
+    }
+
+    .admin-main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 10px !important; /* استغلال كل مليمتر في الشاشة */
+    }
+
+    .card {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+}
         
     </style>
 </head>
@@ -483,5 +503,6 @@
 
 
 </html>
+
 
 
