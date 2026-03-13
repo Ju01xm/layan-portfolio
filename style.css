@@ -529,53 +529,52 @@ nav a:hover { color: var(--accent-blue); }
 /* =========================================
    9. التجاوب مع الشاشات (Responsive)
    ========================================= */
-/* --- Responsive Layout --- */
-@media (max-width: 900px) {
-    header,
-    .footer-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-    }
-    
-    /* ترتيب قائمة الهيدر */
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    /* تكبير مساحة الهيرو عشان الهيدر ما يغطي على النص */
+/* --- تحديث شامل للجوال للموقع الأساسي --- */
+@media (max-width: 768px) {
+    /* تصغير المسافات العلوية */
     .hero.dark-section {
-        padding-top: 15rem !important; 
-    }
-
-    /* تصغير الخطوط شوي في الجوال */
-    .hero h1 { font-size: 2rem; }
-    .hero h2 { font-size: 1.6rem; }
-
-    /* ترتيب الأزرار فوق بعض بشكل أنيق */
-    .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-
-    .about-card {
-        flex-direction: column;
+        padding: 8rem 1.5rem 4rem 1.5rem !important;
         text-align: center;
     }
 
-    .about-left,
-    .about-right {
-        width: 100%;
+    /* تصغير الخطوط عشان تكفي الشاشة */
+    .hero h1 { font-size: 1.8rem; line-height: 1.3; }
+    .hero h2 { font-size: 1.4rem; }
+
+    /* جعل الأزرار والأيقونات في سطر واحد وبحجم أصغر */
+    .hero-actions {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 0.6rem;
     }
 
-    .services-row,
-    .tools-row {
-        justify-content: center;
+    .btn-outline {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* تعديل كروت الخدمات والمدونة لتناسب العرض */
+    .services-row, .blog-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* كرت واحد في كل سطر */
+        gap: 1.5rem;
+    }
+
+    /* تصغير الهيدر (المنيو) */
+    header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    nav {
+        gap: 1rem;
+        font-size: 0.9rem;
     }
 }
-
-
-
