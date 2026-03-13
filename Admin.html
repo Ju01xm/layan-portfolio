@@ -212,67 +212,60 @@
         /* =========================================
            7. التجاوب مع شاشات الجوال (Responsive Admin)
            ========================================= */
-        @media(max-width:768px) {
-            /* القائمة الجانبية تأخذ العرض كامل وتصير فوق */
-            .sidebar { 
-                width: 100%; 
-                height: auto; 
-                position: relative; 
-                border-bottom: 3px solid var(--blue);
-            }
-            
-            /* توسيع مساحة العمل الرئيسية وتقليل الهوامش */
-            .admin-main { 
-                margin-right: 0; 
-                padding: 1rem; /* تقليل الهامش من 2rem إلى 1rem عشان يوسع المكان */
-                width: 100%;
-            }
+        /* --- تحديث شامل للجوال للوحة الإدارة --- */
+@media (max-width: 768px) {
+    /* جعل القائمة الجانبية علوية بدلاً من جانبية لتوفير مساحة */
+    .admin-container {
+        flex-direction: column;
+    }
 
-            /* ترتيب الشريط العلوي وزر الحفظ */
-            .topbar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .save-btn {
-                width: 100%; /* زر الحفظ يصير عريض وواضح في الجوال */
-                text-align: center;
-                padding: 1rem;
-            }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: space-around;
+        border-right: none;
+        border-bottom: 2px solid var(--blue);
+    }
 
-            /* ترتيب الحقول لتكون تحت بعض بدل ما تنضغط جنب بعض */
-            .fg2 { 
-                grid-template-columns: 1fr; 
-            }
+    .sidebar h2 { display: none; } /* إخفاء كلمة Admin Panel لتوفير مساحة */
 
-            /* تقليل هوامش البطاقات البيضاء من الداخل */
-            .card-head { padding: 1rem; }
-            .card-body { padding: 1rem; }
+    /* توسيع منطقة العمل وتقليل الهوامش الميتة */
+    .admin-main {
+        margin-right: 0;
+        padding: 1rem;
+        width: 100%;
+    }
 
-            /* تكبير الحقول النصية لسهولة الكتابة باللمس */
-            .f input, .f textarea {
-                padding: 0.75rem;
-                font-size: 0.95rem;
-            }
-            
-            /* ترتيب صفوف الأدوات (Tools) عشان ما تتداخل */
-            .tool-item-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.5rem;
-            }
-            .tool-item-row select, .tool-item-row input, .del-btn {
-                width: 100%;
-                margin: 0;
-            }
+    /* جعل الحقول تأخذ كامل العرض */
+    .fg2 {
+        grid-template-columns: 1fr;
+    }
 
-            /* تضبيط مربع تسجيل الدخول للجوال */
-            .login-box {
-                padding: 2.5rem 1.5rem;
-                width: 92%;
-                border-radius: 20px;
-            }
-        }
+    .card-body {
+        padding: 1rem;
+    }
+
+    /* جعل أزرار الأدوات والروابط تحت بعضها لسهولة الضغط */
+    .tool-item-row {
+        flex-direction: column;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .tool-item-row input, .tool-item-row select {
+        width: 100% !important;
+    }
+
+    /* زر الحفظ يثبت في الأسفل أو يكون عريض جداً */
+    .save-btn {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+    }
+}
         
     </style>
 </head>
@@ -490,3 +483,4 @@
 
 
 </html>
+
