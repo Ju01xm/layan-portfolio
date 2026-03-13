@@ -578,3 +578,24 @@ nav a:hover { color: var(--accent-blue); }
         font-size: 0.9rem;
     }
 }
+
+/* كود التصغير التلقائي الذكي */
+@media (max-width: 768px) {
+    html {
+        /* يصغر الموقع بنسبة 85% أو أقل حسب الحاجة */
+        zoom: 0.85; 
+        -moz-transform: scale(0.85);
+        -moz-transform-origin: 0 0;
+    }
+    
+    .hero-actions {
+        flex-wrap: nowrap !important; /* يمنع نزول العناصر لسطر جديد مهما حدث */
+        justify-content: center;
+    }
+
+    /* التأكد من أن الصور لا تخرج عن الإطار */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
