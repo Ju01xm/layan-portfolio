@@ -838,6 +838,7 @@ nav a:hover {
         min-width: 100px !important;
         text-align: center !important;
         margin-bottom: 0 !important;
+       padding-bottom: 10; 
     }
 
     /* الأدوات والأسهم */
