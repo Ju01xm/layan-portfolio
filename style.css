@@ -28,8 +28,13 @@ a {
 }
 
 /* تنسيقات عامة للنصوص والأقسام */
-.accent-text { color: var(--accent-blue); }
-.text-white { color: var(--text-white); }
+.accent-text {
+    color: var(--accent-blue);
+}
+
+.text-white {
+    color: var(--text-white);
+}
 
 .section-title {
     text-align: center;
@@ -96,9 +101,19 @@ header {
     gap: 2rem;
 }
 
-nav { display: flex; gap: 2rem; }
-nav a { font-size: 1rem; transition: color 0.3s; }
-nav a:hover { color: var(--accent-blue); }
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+}
 
 .header-actions {
     display: flex;
@@ -131,6 +146,7 @@ nav a:hover { color: var(--accent-blue); }
     font-weight: 600;
     transition: 0.3s;
 }
+
 .btn-contact:hover {
     background: var(--text-white);
     color: var(--bg-black);
@@ -141,7 +157,7 @@ nav a:hover { color: var(--accent-blue); }
     align-items: center;
     gap: 8px;
     background: rgba(255, 255, 255, 0.08);
-    color: #ffffff !important; 
+    color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 0.5rem 1.2rem;
     border-radius: 30px;
@@ -151,6 +167,7 @@ nav a:hover { color: var(--accent-blue); }
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
 }
+
 .btn-lang:hover {
     background: #ffffff;
     color: #000000 !important;
@@ -162,22 +179,41 @@ nav a:hover { color: var(--accent-blue); }
    ========================================= */
 .hero.dark-section {
     background: linear-gradient(rgba(5, 5, 5, 0.30), rgba(5, 5, 5, 0.98)), url('https://ijn12hoh65.ufs.sh/f/gCdr8Ko1IyUJaWJ3TLkXPIJ5uHrcU0ZMVSRbsBytFgwYviTq') !important;
-    background-size: cover !important; 
-    background-position: center top !important; 
-    background-attachment: fixed !important; 
-    padding: 12rem 5% 5rem; 
-    min-height: 100vh; 
+    background-size: cover !important;
+    background-position: center top !important;
+    background-attachment: fixed !important;
+    padding: 12rem 5% 5rem;
+    min-height: 100vh;
 }
 
-.hero h1, .hero h2, .hero-actions, .services-row, .tools-row {
+.hero h1,
+.hero h2,
+.hero-actions,
+.services-row,
+.tools-row {
     position: relative;
     z-index: 2;
 }
 
-.hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
-.hero h2 { font-size: 2.2rem; font-weight: 800; line-height: 1.3; margin-bottom: 2rem; }
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
 
-.hero-actions { display: flex; align-items: center; gap: 1rem; margin-bottom: 4rem; }
+.hero h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+}
 
 .btn-outline {
     border: 1.5px solid var(--text-white);
@@ -186,7 +222,10 @@ nav a:hover { color: var(--accent-blue); }
     font-weight: 600;
 }
 
-.social-squares { display: flex; gap: 0.8rem; }
+.social-squares {
+    display: flex;
+    gap: 0.8rem;
+}
 
 .social-icon {
     width: 40px;
@@ -203,143 +242,718 @@ nav a:hover { color: var(--accent-blue); }
 .social-icon:hover {
     background-color: var(--accent-blue);
     color: var(--text-white);
-    transform: translateY(-4px); 
+    transform: translateY(-4px);
 }
 
 /* --- تأثير الآلة الكاتبة --- */
 .hero h2.typewriter-h2 {
-    font-size: 20px !important;
+    font-size: 25px !important;
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
 }
-.typing-text { color: var(--accent-blue); font-weight: bold; }
-.cursor { display: inline-block; color: var(--text-white); animation: blink 0.75s step-end infinite; }
-@keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
+
+.typing-text {
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+.cursor {
+    display: inline-block;
+    color: var(--text-white);
+    animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
 
 /* =========================================
    4. الخدمات والأدوات 
    ========================================= */
-.services-row { display: flex; justify-content: space-evenly; align-items: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap; }
-.service-item span { font-weight: 800; font-size: 1.2rem; display: block; margin-bottom: 0.5rem; }
-.service-item p { font-size: 0.9rem; line-height: 1.4; color: #ddd; }
+.services-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
 
-.tools-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 4rem auto; }
-.tools-row h3 { font-size: 1.5rem; line-height: 1.2; color: var(--text-white); }
-.tools-icons { display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; max-width: 1000px; }
+.service-item span {
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
 
-.tool-box { background: var(--text-white); color: var(--bg-black); font-weight: 900; font-size: 1.5rem; padding: 0.4rem 0.6rem; border-radius: 8px; line-height: 1; }
-.tool-item { display: flex; align-items: center; gap: 0.5rem; }
-.tool-svg { width: 28px; height: 28px; }
-.tool-text { font-size: 1.2rem; font-weight: 600; color: var(--text-white); }
-.stacked-text { display: flex; flex-direction: column; line-height: 1.1; font-size: 1rem; font-weight: 600; color: var(--text-white); }
-.custom-tool-img { height: 45px; width: auto; object-fit: contain; mix-blend-mode: screen; }
+.service-item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ddd;
+}
+
+.tools-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin: 4rem auto;
+}
+
+.tools-row h3 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--text-white);
+    white-space: nowrap !important;
+}
+
+
+.tools-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+
+/* حاوية أسهم الأدوات في الكمبيوتر */
+.tools-slider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-arrow {
+    display: none;
+}
+
+/* مخفية في اللابتوب */
+
+.tool-box {
+    background: var(--text-white);
+    color: var(--bg-black);
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    line-height: 1;
+}
+
+.tool-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tool-svg {
+    width: 28px;
+    height: 28px;
+}
+
+.tool-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.stacked-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.custom-tool-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
 
 /* =========================================
    5. قسم About Me
    ========================================= */
-.about-container { display: flex; flex-direction: column; gap: 2rem; }
-.about-card { display: flex; background: #ffffff; border-radius: 20px; padding: 2.5rem; box-shadow: var(--card-shadow); align-items: center; gap: 2rem; }
-.about-left { width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 200px; text-align: center; }
-.about-icon { width: 100px; height: 100px; object-fit: contain; margin-bottom: 1.5rem; }
-.about-left h3 { font-size: 1.1rem; font-weight: 800; }
-.about-right { width: 75%; font-size: 1rem; color: #444; line-height: 1.6; }
+.about-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+    align-items: center;
+    gap: 2rem;
+}
+
+.about-left {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    text-align: center;
+}
+
+.about-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.about-left h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.about-right {
+    width: 75%;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
 
 /* =========================================
    6. قصص النجاح (Portfolio Carousel)
    ========================================= */
-.success-stories { padding: 5rem 5%; }
-.carousel-wrapper { display: flex; align-items: center; position: relative; }
-.carousel-track { display: flex; gap: 1.5rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem; scrollbar-width: none; width: 100%; }
-.carousel-track::-webkit-scrollbar { display: none; }
-.carousel-btn { background: none; border: none; font-size: 2.5rem; color: var(--text-white); cursor: pointer; padding: 0 1rem; z-index: 10; }
-.story-card { min-width: 320px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 25px; padding: 1rem; display: flex; flex-direction: column; }
-.story-top { background: var(--accent-blue); color: var(--text-white); border-radius: 20px; padding: 4rem 1.5rem 2rem 1.5rem; font-size: 1.3rem; font-weight: 600; min-height: 180px; }
-.story-bottom { padding: 1.5rem 1rem; color: #ccc; font-size: 0.9rem; line-height: 1.6; }
+.success-stories {
+    padding: 5rem 5%;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1rem;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--text-white);
+    cursor: pointer;
+    padding: 0 1rem;
+    z-index: 10;
+}
+
+.story-card {
+    min-width: 320px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.story-top {
+    background: var(--accent-blue);
+    color: var(--text-white);
+    border-radius: 20px;
+    padding: 4rem 1.5rem 2rem 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-height: 180px;
+}
+
+.story-bottom {
+    padding: 1.5rem 1rem;
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
 
 /* =========================================
    7. المدونة (Blog Preview)
    ========================================= */
-.blog-teaser { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
-.blog-teaser-btn { background: var(--bg-black); color: var(--text-white); padding: 0.6rem 1.5rem; border-radius: 20px; font-size: 0.9rem; }
-.blog-preview-grid { display: flex; gap: 1.5rem; overflow-x: auto; scroll-behavior: smooth; padding: 2rem 1rem; scrollbar-width: none; width: 100%; margin-top: 2rem; }
-.blog-preview-grid::-webkit-scrollbar { display: none; }
-.blog-card { width: 320px; background: #FFFFFF; border-radius: 35px; padding: 25px; position: relative; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f0; }
-.blog-visual-area { position: relative; height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-.brain-img { width: 250px; position: relative; z-index: 2; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-.study-text { font-size: 0.85rem; color: #666; margin-bottom: 8px; }
-.highlight-percent { font-size: 1.8rem; font-weight: 800; color: #4CAF50; margin-bottom: 5px; }
+.blog-teaser {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.blog-teaser-btn {
+    background: var(--bg-black);
+    color: var(--text-white);
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.blog-preview-grid {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 2rem 1rem;
+    scrollbar-width: none;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.blog-preview-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.blog-card {
+    width: 320px;
+    background: #FFFFFF;
+    border-radius: 35px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.blog-visual-area {
+    position: relative;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.brain-img {
+    width: 250px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+}
+
+.study-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.highlight-percent {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #4CAF50;
+    margin-bottom: 5px;
+}
 
 /* =========================================
    8. الفوتر وزر الأدمين (Footer & Admin)
    ========================================= */
-.footer-section { padding: 2rem 5%; }
-.footer-content { display: flex; justify-content: flex-end; align-items: center; gap: 2rem; }
-.footer-icons { display: flex; gap: 1rem; }
-.footer-icons .icon { width: 40px; height: 40px; background: var(--text-white); color: var(--bg-black); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease; }
-.footer-icons .icon:hover { transform: translateY(-4px); background: var(--accent-blue); color: var(--text-white); }
-.admin-gear { position: fixed; bottom: 25px; left: 25px; background: var(--bg-black); color: var(--text-white); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid var(--accent-blue); transition: all 0.3s ease; }
-.admin-gear:hover { transform: scale(1.1) rotate(45deg); background: var(--accent-blue); }
+.footer-section {
+    padding: 2rem 5%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-icons .icon {
+    width: 40px;
+    height: 40px;
+    background: var(--text-white);
+    color: var(--bg-black);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.footer-icons .icon:hover {
+    transform: translateY(-4px);
+    background: var(--accent-blue);
+    color: var(--text-white);
+}
+
+.admin-gear {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: var(--bg-black);
+    color: var(--text-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 2px solid var(--accent-blue);
+    transition: all 0.3s ease;
+}
+
+.admin-gear:hover {
+    transform: scale(1.1) rotate(45deg);
+    background: var(--accent-blue);
+}
 
 /* =========================================
    9. التجاوب مع الشاشات (Responsive)
    ========================================= */
 @media (max-width: 900px) {
-    header, .footer-content { flex-direction: column; gap: 1rem; align-items: center; }
-    .about-card { flex-direction: column; text-align: center; }
-    .about-left, .about-right { width: 100%; }
-    .services-row, .tools-row { justify-content: center; }
+
+    header,
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .about-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-left,
+    .about-right {
+        width: 100%;
+    }
+
+    .services-row,
+    .tools-row {
+        justify-content: center;
+    }
 }
 
 /* --- تجاوب الجوال الدقيق والنهائي --- */
 @media (max-width: 768px) {
-    html, body { overflow-x: hidden !important; width: 100% !important; }
+
+    html,
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
 
     /* الهيدر الجديد مع الهامبرجر */
-    header { flex-direction: row !important; justify-content: space-between !important; align-items: center !important; padding: 20px 25px !important; }
-    
-    .menu-toggle { display: flex; }
-    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    header {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px 25px !important;
+    }
 
-    .nav-wrapper { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: rgba(5, 5, 5, 0.98); flex-direction: column; justify-content: center; align-items: center; gap: 30px; transition: 0.4s ease-in-out; z-index: 9998; }
-    .nav-wrapper.active { left: 0; }
-    
-    nav { flex-direction: column !important; align-items: center !important; gap: 25px !important; }
-    nav a { font-size: 22px !important; font-weight: bold; }
-    .header-actions { flex-direction: column !important; gap: 20px !important; transform: scale(1.1); }
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu-toggle.is-active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.is-active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .nav-wrapper {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(5, 5, 5, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: 0.4s ease-in-out;
+        z-index: 9998;
+    }
+
+    .nav-wrapper.active {
+        left: 0;
+    }
+
+    nav {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 25px !important;
+    }
+
+    nav a {
+        font-size: 22px !important;
+        font-weight: bold;
+    }
+
+    .header-actions {
+        flex-direction: column !important;
+        gap: 20px !important;
+        transform: scale(1.1);
+    }
 
     /* تصغير اللوجو في الجوال */
-    .header-logo { height: 30px !important; }
+    .header-logo {
+        height: 30px !important;
+    }
 
-    /* قسم الهيرو */
-    .hero.dark-section { padding: 140px 20px 60px 20px !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
-    .hero h1 { font-size: 32px !important; text-align: left !important; margin-bottom: 15px !important; max-width: 100% !important; }
-    .hero h2 { font-size: 15px !important; text-align: left !important; margin-bottom: 40px !important; max-width: 95% !important; }
-    .hero h2.typewriter-h2 { font-size: 14px !important; }
-    
-    .hero-actions { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 15px !important; }
-    .btn-outline { padding: 10px 20px !important; font-size: 14px !important; }
-    .social-icon { width: 35px !important; height: 35px !important; flex-shrink: 0 !important; }
+    /* 💡 قسم الهيرو المعدل (المنحنى والظل) 💡 */
+    .hero.dark-section {
+        padding-top: 130px !important;
+        padding-bottom: 20px !important;
+        min-height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+
+        border-bottom-left-radius: 40px !important;
+        border-bottom-right-radius: 40px !important;
+
+        position: relative !important;
+        z-index: 10 !important;
+        /* يخليه فوق القسم الأبيض */
+
+        box-shadow: inset 0px -20px 2000px rgba(143, 143, 143, 0.5) !important;
+        /* يسحب القسم اللي تحته (الأبيض) ليكون وراه */
+        margin-bottom: -80px !important;
+
+        /* حل مشكلة الآيفون */
+        background-attachment: scroll !important;
+        overflow: visible !important;
+    }
+
+    .light-section {
+        background-color: #ffffff !important;
+
+        /* نلغي القوس العلوي تماماً عشان ما يصير فيه فراغ أسود */
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+        /* يكون تحت الأسود */
+
+        /* مساحة عشان الكلام ما يندفن تحت قوس الأسود */
+        padding-top: 80px !important;
+    }
+
+
+    .hero h1 {
+        font-size: 32px !important;
+        text-align: left !important;
+        margin-bottom: 15px !important;
+        max-width: 100% !important;
+    }
+
+    .hero h2 {
+        font-size: 15px !important;
+        text-align: left !important;
+        margin-bottom: 40px !important;
+        max-width: 95% !important;
+    }
+
+    /* تكبير خط الآلة الكاتبة */
+    .hero h2.typewriter-h2 {
+        font-size: 22.5px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .hero-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        gap: 15px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .btn-outline {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+    }
+
+    .social-icon {
+        width: 35px !important;
+        height: 35px !important;
+        flex-shrink: 0 !important;
+    }
 
     /* الخدمات والأدوات */
-    .services-row { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 20px 5px !important; margin-top: 30px !important; }
-    .service-item, .service-card { width: 31% !important; min-width: 100px !important; text-align: center !important; margin-bottom: 0 !important; }
+    .services-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 20px 5px !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        width: 100% !important;
+    }
 
-    .tools-row { display: flex !important; flex-direction: column !important; align-items: flex-start !important; padding: 0 10px !important; }
-    .tools-icons { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; overflow-x: auto !important; gap: 25px !important; width: 100% !important; padding-bottom: 15px !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .tools-icons::-webkit-scrollbar { display: none; }
-    .tool-box, .tool-item { flex: 0 0 auto !important; }
+    .service-item,
+    .service-card {
+        width: 31% !important;
+        min-width: 100px !important;
+        text-align: center !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* الأدوات والأسهم */
+    .tools-row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 0 10px !important;
+        margin-top: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    html[dir="rtl"] .tools-row,
+    body.rtl .tools-row {
+        align-items: flex-end !important;
+    }
+
+    .tools-row h3 {
+        font-size: 13px !important;
+        margin-bottom: 8px !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        letter-spacing: 1px;
+        text-align: left !important;
+    }
+
+    html[dir="rtl"] .tools-row h3,
+    body.rtl .tools-row h3 {
+        text-align: right !important;
+    }
+
+    .tools-slider-container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 5px !important;
+        box-sizing: border-box !important;
+    }
+
+    .scroll-arrow {
+        display: block !important;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 22px;
+        padding: 5px;
+        cursor: pointer;
+        transition: 0.2s;
+        flex-shrink: 0 !important;
+    }
+
+    .scroll-arrow:active {
+        color: #fff;
+        transform: scale(0.9);
+    }
+
+    .tools-icons {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 20px !important;
+        width: auto !important;
+        padding-bottom: 5px !important;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+
+    .tools-icons::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tool-box,
+    .tool-item {
+        flex: 0 0 auto !important;
+    }
 
     /* قفل حجم صور وأيقونات الأدوات في الجوال */
-    .custom-tool-img { height: 35px !important; max-width: 100px !important; object-fit: contain !important; }
-    .tool-svg { width: 24px !important; height: 24px !important; }
-    .tool-box { font-size: 1.2rem !important; padding: 0.3rem 0.5rem !important; }
+    .custom-tool-img {
+        height: 35px !important;
+        max-width: 100px !important;
+        object-fit: contain !important;
+    }
+
+    .tool-svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .tool-box {
+        font-size: 1.2rem !important;
+        padding: 0.3rem 0.5rem !important;
+    }
 
     /* الأقسام السفلية */
-    .about-card { flex-direction: column !important; padding: 30px 20px !important; }
-    .about-left, .about-right { width: 100% !important; text-align: center !important; }
-    .slide, .portfolio-card, .story-card, .blog-card { width: 85% !important; margin: 0 auto !important; flex: 0 0 85% !important; }
+    .about-card {
+        flex-direction: column !important;
+        padding: 30px 20px !important;
+    }
+
+    .about-left,
+    .about-right {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .slide,
+    .portfolio-card,
+    .story-card,
+    .blog-card {
+        width: 85% !important;
+        margin: 0 auto !important;
+        flex: 0 0 85% !important;
+    }
 }
