@@ -184,7 +184,6 @@ function loadBlogPreviews() {
             </div>`;
     });
 }
-
 // 1. تحديد الكلمات حسب اللغة
 function getPhrases() {
     // 1. فحص لغة الموقع الحالية بذكاء (سواء من اتجاه الصفحة أو التخزين)
@@ -251,7 +250,6 @@ function typeEffect() {
 document.addEventListener("DOMContentLoaded", function() {
     typeEffect();
 });
-
 
 // ==========================================
 // 4. تشغيل الأكواد الأساسية
