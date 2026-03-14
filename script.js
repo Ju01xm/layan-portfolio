@@ -9,14 +9,14 @@ const uiDict = {
     en: {
         navHome: "Home", navAbout: "About me", navPort: "Portfolio", navBlog: "Blog", navContact: "Contact me",
         langToggle: "عربي", 
-        aboutTitle: "ABOUT ME", successTitle: "SUCCESS STORIES", blogTitle: "MY BLOGS", toolsTitle: "CORE<br>TOOLS",
+        aboutTitle: "ABOUT ME", successTitle: "SUCCESS STORIES", blogTitle: "MY BLOGS", toolsTitle: "CORE TOOLS",
         blogTeaserDesc: "A weekly newsletter on marketing, corporate communications, and brand building.",
         blogTeaserBtn: "View all articles &nbsp;↗"
     },
     ar: {
         navHome: "الرئيسية", navAbout: "نبذة عني", navPort: "أعمالي", navBlog: "المدونة", navContact: "تواصل معي",
         langToggle: "English", 
-        aboutTitle: "نبذة عني", successTitle: "قصص النجاح", blogTitle: "المدونة", toolsTitle: "الأدوات<br>الأساسية",
+        aboutTitle: "نبذة عني", successTitle: "قصص النجاح", blogTitle: "المدونة", toolsTitle: "الأدوات الأساسية",
         blogTeaserDesc: "نشرة أسبوعية في التسويق والاتصال المؤسسي وبناء العلامات التجارية.",
         blogTeaserBtn: "استعرض جميع المقالات &nbsp;↗"
     }
