@@ -756,7 +756,7 @@ nav a:hover {
         z-index: 10 !important;
         /* يخليه فوق القسم الأبيض */
 
-        box-shadow: inset 20px -20px 100px -25px rgba(143, 143, 143, 0.5) !important;
+        box-shadow: inset 20px -20px 1000px -25px rgba(143, 143, 143, 0.5) !important;
         /* يسحب القسم اللي تحته (الأبيض) ليكون وراه */
         margin-bottom: -80px !important;
 
@@ -812,7 +812,7 @@ nav a:hover {
     }
 
     .btn-outline {
-        padding: 10px 20px !important;
+        padding: 10px 10px !important;
         font-size: 14px !important;
     }
 
@@ -839,7 +839,7 @@ nav a:hover {
         min-width: 100px !important;
         text-align: center !important;
         margin-bottom: 10px !important;
-        padding-top: 10px !important;
+        padding-top: 0px !important;
     }
 
     /* الأدوات والأسهم */
@@ -866,7 +866,7 @@ nav a:hover {
         letter-spacing: 1px;
         text-align: left !important;
         padding-top: 10px !important;
-        padding-bottom: -10px !important;
+        padding-bottom: -20px !important;
     }
 
     html[dir="rtl"] .tools-row h3,
