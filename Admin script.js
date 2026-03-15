@@ -1,6 +1,6 @@
 /* ==========================================
    ADMIN SCRIPT — Layan Alamrah Portfolio
-   Bilingual EN/AR editor + Firestore writes + Blog
+   Bilingual EN/AR editor + Firestore writes + Blog + Theme/Images
    ========================================== */
 
 // ==========================================
@@ -39,7 +39,8 @@ async function loadFirebase() {
 // ==========================================
 const DEFAULTS = {
     en: {
-        hero: { greeting: "HI! I'M LAYAN ALAMRAH", title1: "I'M A BRAND & CORPORATE", title2: "COMMUNICATION PROFESSIONAL", btnText: "Get in Touch →" },
+        theme: { accentColor: '#4052FF' }, // اللون الافتراضي
+        hero: { greeting: "HI! I'M LAYAN ALAMRAH", title1: "I'M A BRAND & CORPORATE", title2: "COMMUNICATION PROFESSIONAL", btnText: "Get in Touch →", bgImage: "" },
         services: [
             { num: '#01', title: 'Brand\nManagement' }, { num: '#02', title: 'Content\nStrategy' },
             { num: '#03', title: 'Digital\nMarketing' }, { num: '#04', title: 'Event\nManagement' }, { num: '#05', title: 'Corporate\nCommunications' }
@@ -55,14 +56,15 @@ const DEFAULTS = {
             { title: 'PROFESSIONAL\nDEVELOPMENT', text: 'Industrial Design graduate with PMP and Agile Scrum certifications.' }
         ],
         stories: [
-            { title: 'Brand Identity\n& Positioning', text: 'Led the development of brand and communication assets.' },
-            { title: 'Corporate\nCommunications', text: 'Led corporate communications, preparing leadership presentations.' },
-            { title: 'Exhibition & Industry\nBrand Presence', text: 'Led brand presence at industry exhibitions and corporate events.' }
+            { title: 'Brand Identity\n& Positioning', text: 'Led the development of brand and communication assets.', imageUrl: '' },
+            { title: 'Corporate\nCommunications', text: 'Led corporate communications, preparing leadership presentations.', imageUrl: '' },
+            { title: 'Exhibition & Industry\nBrand Presence', text: 'Led brand presence at industry exhibitions and corporate events.', imageUrl: '' }
         ],
         footer: { title: 'Get in Touch', email: '', linkedin: '', twitter: '', insta: '' },
     },
     ar: {
-        hero: { greeting: "مرحباً! أنا ليان العمرة", title1: "متخصصة في الاتصال", title2: "المؤسسي والعلامة التجارية", btnText: "تواصلي معي ←" },
+        theme: { accentColor: '#4052FF' }, // اللون الافتراضي
+        hero: { greeting: "مرحباً! أنا ليان العمرة", title1: "متخصصة في الاتصال", title2: "المؤسسي والعلامة التجارية", btnText: "تواصلي معي ←", bgImage: "" },
         services: [
             { num: '#01', title: 'إدارة\nالعلامة التجارية' }, { num: '#02', title: 'استراتيجية\nالمحتوى' },
             { num: '#03', title: 'التسويق\nالرقمي' }, { num: '#04', title: 'إدارة\nالفعاليات' }, { num: '#05', title: 'الاتصالات\nالمؤسسية' }
@@ -78,9 +80,9 @@ const DEFAULTS = {
             { title: 'التطوير\nالمهني', text: 'خريجة تصميم صناعي حاصلة على شهادات PMP وAgile Scrum.' }
         ],
         stories: [
-            { title: 'هوية العلامة التجارية\nوتموضعها', text: 'قادت تطوير أصول العلامة التجارية والاتصالات.' },
-            { title: 'الاتصالات\nالمؤسسية', text: 'قادت الاتصالات المؤسسية وأعدّت عروض القيادة.' },
-            { title: 'الحضور في المعارض\nوالفعاليات', text: 'قادت تخطيط وتنفيذ حضور العلامة التجارية في المعارض.' }
+            { title: 'هوية العلامة التجارية\nوتموضعها', text: 'قادت تطوير أصول العلامة التجارية والاتصالات.', imageUrl: '' },
+            { title: 'الاتصالات\nالمؤسسية', text: 'قادت الاتصالات المؤسسية وأعدّت عروض القيادة.', imageUrl: '' },
+            { title: 'الحضور في المعارض\nوالفعاليات', text: 'قادت تخطيط وتنفيذ حضور العلامة التجارية في المعارض.', imageUrl: '' }
         ],
         footer: { title: 'تواصلي معي', email: '', linkedin: '', twitter: '', insta: '' },
     }
@@ -186,11 +188,11 @@ async function initAdmin() {
 // 5. التبديل بين اللغات والأقسام (UI Controls)
 // ==========================================
 const META = {
-    hero: { title: 'Hero Section', sub: 'تعديل الاسم والعنوان — كلتا اللغتين' },
+    hero: { title: 'الهوية والهيرو', sub: 'تعديل الألوان، صورة الهيرو، والنصوص' },
     services: { title: 'الخدمات', sub: 'إضافة أو تعديل أو حذف الخدمات' },
     tools: { title: 'Core Tools', sub: 'تعديل الأدوات المعروضة' },
     about: { title: 'About Me', sub: 'تعديل بطاقات التعريف' },
-    stories: { title: 'Success Stories', sub: 'تعديل قصص النجاح' },
+    stories: { title: 'Success Stories', sub: 'تعديل قصص النجاح وإضافة صور' },
     footer: { title: 'Footer & Contact', sub: 'معلومات التواصل والروابط' },
     blog: { title: 'إدارة المدونة', sub: 'إضافة المقالات وتعديلها وحذفها' },
     security: { title: 'كلمة المرور', sub: 'تغيير كلمة مرور لوحة التحكم' },
@@ -237,6 +239,12 @@ function collectPanel() {
             c.hero.title1 = document.getElementById('heroTitle1').value;
             c.hero.title2 = document.getElementById('heroTitle2').value;
             c.hero.btnText = document.getElementById('heroBtnText').value;
+            
+            // حفظ اللون الأساسي
+            if (!c.theme) c.theme = {};
+            if (document.getElementById('themeColor')) {
+                c.theme.accentColor = document.getElementById('themeColor').value;
+            }
             break;
         case 'footer':
             c.footer.title = document.getElementById('footerTitle').value;
@@ -281,11 +289,49 @@ function renderAll() {
 }
 
 function renderHero() {
-    document.getElementById('heroGreeting').value = C().hero.greeting;
-    document.getElementById('heroTitle1').value = C().hero.title1;
-    document.getElementById('heroTitle2').value = C().hero.title2;
-    document.getElementById('heroBtnText').value = C().hero.btnText;
+    document.getElementById('heroGreeting').value = C().hero.greeting || '';
+    document.getElementById('heroTitle1').value = C().hero.title1 || '';
+    document.getElementById('heroTitle2').value = C().hero.title2 || '';
+    document.getElementById('heroBtnText').value = C().hero.btnText || '';
+    
+    // إعدادات اللون
+    if (document.getElementById('themeColor')) {
+        document.getElementById('themeColor').value = C().theme?.accentColor || '#4052FF';
+    }
+    
+    // إعدادات صورة الهيرو
+    if (document.getElementById('heroBgPreview')) {
+        const previewImg = document.getElementById('heroBgPreview');
+        if (C().hero.bgImage) {
+            previewImg.src = C().hero.bgImage;
+            previewImg.style.display = 'block';
+        } else {
+            previewImg.style.display = 'none';
+        }
+    }
 }
+
+// دالة رفع وحذف صورة الهيرو
+window.uploadHeroBg = function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => { 
+        content[editLang].hero.bgImage = event.target.result; 
+        if (document.getElementById('heroBgPreview')) {
+            document.getElementById('heroBgPreview').src = event.target.result;
+            document.getElementById('heroBgPreview').style.display = 'block';
+        }
+    };
+    reader.readAsDataURL(file);
+};
+window.removeHeroBg = function() {
+    content[editLang].hero.bgImage = '';
+    if (document.getElementById('heroBgPreview')) {
+        document.getElementById('heroBgPreview').src = '';
+        document.getElementById('heroBgPreview').style.display = 'none';
+    }
+    document.getElementById('heroImgInput').value = ''; // تصفير زر الرفع
+};
 
 function renderServices() {
     const el = document.getElementById('servRep'); el.innerHTML = '';
@@ -356,9 +402,25 @@ function renderStories() {
     const el = document.getElementById('storiesRep'); el.innerHTML = '';
     C().stories.forEach((s, i) => {
         const d = document.createElement('div'); d.className = 'rep-item';
+        
+        // واجهة رفع وحذف صورة القصة
+        const imgUI = `
+            <div class="f" style="background: rgba(64,82,255,0.05); padding: 10px; border-radius: 8px;">
+                <label style="color:var(--blue); font-weight:bold;">${editLang === 'ar' ? 'صورة القصة (تستبدل المربع الأزرق)' : 'Story Image (Optional)'}</label>
+                <input type="file" accept="image/*" onchange="uploadStoryImg(event, ${i})" style="max-width:250px; padding: 0.3rem;" />
+                ${s.imageUrl && s.imageUrl.length > 50 ? 
+                    `<div style="margin-top:8px;">
+                        <img src="${s.imageUrl}" style="max-width:150px; border-radius:10px; display:block; margin-bottom:5px;">
+                        <button class="del-btn" onclick="removeStoryImg(${i})">إزالة الصورة والعودة للمربع</button>
+                    </div>` 
+                : '<span style="font-size:0.8rem; color:#888;">لم يتم رفع صورة (سيظهر المربع الأزرق)</span>'}
+            </div>
+        `;
+
         d.innerHTML = `
             <div class="rep-head"><span class="rep-num">${editLang === 'ar' ? 'قصة' : 'Story'} ${i + 1}</span>
             <button class="del-btn" onclick="deleteStory(${i})">🗑</button></div>
+            ${imgUI}
             <div class="f"><label>${editLang === 'ar' ? 'العنوان (/ للسطر الثاني)' : 'Title (/ for line break)'}</label>
             <input type="text" value="${s.title.replace('\n', ' / ')}" onchange="content['${editLang}'].stories[${i}].title=this.value.replace(' / ','\\n')"/></div>
             <div class="f"><label>${editLang === 'ar' ? 'النص' : 'Text'}</label>
@@ -366,7 +428,19 @@ function renderStories() {
         el.appendChild(d);
     });
 }
-window.addStory = () => { C().stories.push({ title: editLang === 'ar' ? 'قصة جديدة' : 'New Story', text: '...' }); renderStories(); };
+
+// دوال رفع وحذف صور القصص
+window.uploadStoryImg = function (e, i) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => { content[editLang].stories[i].imageUrl = event.target.result; renderStories(); };
+    reader.readAsDataURL(file);
+};
+window.removeStoryImg = function(i) {
+    content[editLang].stories[i].imageUrl = ''; renderStories();
+};
+
+window.addStory = () => { C().stories.push({ title: editLang === 'ar' ? 'قصة جديدة' : 'New Story', text: '...', imageUrl: '' }); renderStories(); };
 window.deleteStory = i => { if (C().stories.length <= 1) return toast('يجب الإبقاء على قصة', 'err'); C().stories.splice(i, 1); renderStories(); };
 
 function renderFooter() {

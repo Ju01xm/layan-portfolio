@@ -45,6 +45,11 @@ async function loadSiteData() {
         if (docSnap.exists()) {
             const data = docSnap.data();
 
+            // --- 🎨 تحديث لون الموقع (الثيم) من الأدمين ---
+            if (data.theme && data.theme.accentColor) {
+                document.documentElement.style.setProperty('--accent-blue', data.theme.accentColor);
+            }
+
             // --- أ. تحديث قسم About Me ---
             if (data.about && data.about.length > 0) {
                 const aboutParagraphs = document.querySelectorAll('.about-right p');
@@ -55,16 +60,31 @@ async function loadSiteData() {
                 }
             }
 
-            // --- ب. تحديث قصص النجاح (Portfolio) ---
+            // --- ب. تحديث قصص النجاح (Portfolio) مع دعم الصور ---
             if (data.stories && data.stories.length > 0) {
                 const track = document.getElementById('success-track');
                 if (track) {
                     track.innerHTML = ""; 
                     data.stories.forEach(story => {
+                        let topContent = "";
+                        let titleInBottom = "";
+
+                        // إذا العميل رفع صورة نستخدمها، وإذا لا نرجع للمربع الملون
+                        if (story.imageUrl && story.imageUrl.trim() !== "") {
+                            topContent = `<img src="${story.imageUrl}" alt="${story.title}" class="story-image">`;
+                            // إذا حطينا صورة، العنوان الأساسي بيختفي، فنجيب عنوان صغير فوق النص
+                            titleInBottom = `<h4 style="color: var(--text-white); margin-bottom: 8px; font-size: 1.1rem;">${story.title}</h4>`;
+                        } else {
+                            topContent = `<div class="story-top">${story.title.replace(/\n/g, '<br>')}</div>`;
+                        }
+
                         track.innerHTML += `
                             <div class="story-card">
-                                <div class="story-top">${story.title.replace(/\n/g, '<br>')}</div>
-                                <div class="story-bottom">${story.text}</div>
+                                ${topContent}
+                                <div class="story-bottom">
+                                    ${titleInBottom}
+                                    ${story.text}
+                                </div>
                             </div>`;
                     });
                 }
@@ -94,13 +114,21 @@ async function loadSiteData() {
                 }
             }
 
-            // --- د. تحديث القسم الرئيسي (Hero) ---
+            // --- د. تحديث القسم الرئيسي (Hero) وخلفيته ---
             if (data.hero) {
                 const heroGreeting = document.getElementById('heroGreeting');
                 const heroTitle = document.getElementById('heroTitle');
+                const heroSection = document.getElementById('home');
 
                 if (heroGreeting) heroGreeting.textContent = data.hero.greeting;
                 if (heroTitle) heroTitle.innerHTML = `${data.hero.title1}<br>${data.hero.title2}`;
+
+                // إذا تم رفع صورة جديدة للهيرو من الأدمين
+                if (data.hero.bgImage && data.hero.bgImage.trim() !== "") {
+                    heroSection.style.setProperty('background', `linear-gradient(rgba(5, 5, 5, 0.30), rgba(5, 5, 5, 0.98)), url('${data.hero.bgImage}')`, 'important');
+                    heroSection.style.setProperty('background-size', 'cover', 'important');
+                    heroSection.style.setProperty('background-position', 'center top', 'important');
+                }
             }
 
             // --- هـ. تحديث قسم الخدمات (Services) ---
@@ -184,18 +212,16 @@ function loadBlogPreviews() {
             </div>`;
     });
 }
-// 1. تحديد الكلمات حسب اللغة
+
+// 1. تحديد الكلمات حسب اللغة للآلة الكاتبة
 function getPhrases() {
-    // 1. فحص لغة الموقع الحالية بذكاء (سواء من اتجاه الصفحة أو التخزين)
-    const isArabic = document.documentElement.dir === 'rtl' || localStorage.getItem('lang') === 'ar' || document.body.classList.contains('rtl');
+    const isArabic = document.documentElement.dir === 'rtl' || localStorage.getItem('layan_lang') === 'ar' || document.body.classList.contains('rtl');
     
-    // 2. إجبار النص الثابت (I have expertise in) إنه يتغير فوراً مع اللغة
     const staticText = document.getElementById('static-expertise');
     if(staticText) {
         staticText.textContent = isArabic ? staticText.getAttribute('data-ar') : staticText.getAttribute('data-en');
     }
 
-    // 3. إرجاع الكلمات حسب اللغة
     return isArabic ? [
         "إدارة العلامات التجارية",
         "التواصل المؤسسي",
@@ -216,37 +242,33 @@ let charIndex = 0;
 let isDeleting = false;
 
 function typeEffect() {
-    if (!typewriterElement) return; // عشان ما يطلع خطأ بصفحات ثانية
+    if (!typewriterElement) return;
 
     const phrases = getPhrases();
     const currentPhrase = phrases[phraseIndex];
     
     if (isDeleting) {
-        // مسح الحروف
         typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
         charIndex--;
     } else {
-        // كتابة الحروف
         typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
     }
 
-    // سرعة الكتابة والمسح
     let typeSpeed = isDeleting ? 40 : 100;
 
     if (!isDeleting && charIndex === currentPhrase.length) {
-        typeSpeed = 2000; // وقف ثانيتين لما تخلص الكلمة عشان تنقري
+        typeSpeed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 400; // وقف شوي قبل تبدأ الكلمة الجديدة
+        typeSpeed = 400;
     }
 
     setTimeout(typeEffect, typeSpeed);
 }
 
-// تشغيل الفنكشن أول ما يفتح الموقع
 document.addEventListener("DOMContentLoaded", function() {
     typeEffect();
 });
@@ -289,7 +311,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
 // ==========================================
 // تشغيل قائمة الهامبرجر للموبايل
 // ==========================================
@@ -299,12 +320,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.nav-wrapper nav a');
 
     if(menuToggle && navWrapper) {
-        // فتح وإغلاق القائمة عند الضغط على الهامبرجر
         menuToggle.addEventListener('click', function() {
             menuToggle.classList.toggle('is-active');
             navWrapper.classList.toggle('active');
             
-            // قفل السكرول حق الصفحة الرئيسية لما تنفتح القائمة
             if(navWrapper.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -312,12 +331,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // إغلاق القائمة تلقائياً لما تضغطين على أي رابط
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('is-active');
                 navWrapper.classList.remove('active');
-                document.body.style.overflow = 'auto'; // إرجاع السكرول
+                document.body.style.overflow = 'auto';
             });
         });
     }

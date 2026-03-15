@@ -208,85 +208,6 @@
             .admin-main { margin-right: 0; }
             .fg2 { grid-template-columns: 1fr; }
         }
-
-        /* =========================================
-           7. التجاوب مع شاشات الجوال (Responsive Admin)
-           ========================================= */
-        /* --- تحديث شامل للجوال للوحة الإدارة --- */
-@media (max-width: 768px) {
-    /* جعل القائمة الجانبية علوية بدلاً من جانبية لتوفير مساحة */
-    .admin-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        padding: 1rem;
-        flex-direction: row;
-        justify-content: space-around;
-        border-right: none;
-        border-bottom: 2px solid var(--blue);
-    }
-
-    .sidebar h2 { display: none; } /* إخفاء كلمة Admin Panel لتوفير مساحة */
-
-    /* توسيع منطقة العمل وتقليل الهوامش الميتة */
-    .admin-main {
-        margin-right: 0;
-        padding: 1rem;
-        width: 100%;
-    }
-
-    /* جعل الحقول تأخذ كامل العرض */
-    .fg2 {
-        grid-template-columns: 1fr;
-    }
-
-    .card-body {
-        padding: 1rem;
-    }
-
-    /* جعل أزرار الأدوات والروابط تحت بعضها لسهولة الضغط */
-    .tool-item-row {
-        flex-direction: column;
-        background: #f8f9fa;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .tool-item-row input, .tool-item-row select {
-        width: 100% !important;
-    }
-
-    /* زر الحفظ يثبت في الأسفل أو يكون عريض جداً */
-    .save-btn {
-        width: 100%;
-        padding: 1.2rem;
-        font-size: 1.1rem;
-    }
-}
-        @media (max-width: 768px) {
-    body {
-        zoom: 0.9; /* تصغير طفيف للوحة التحكم لتناسب اليد */
-    }
-
-    .admin-container {
-        display: block; /* يلغي ضغط العناصر الجانبية */
-    }
-
-    .admin-main {
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 10px !important; /* استغلال كل مليمتر في الشاشة */
-    }
-
-    .card {
-        width: 100% !important;
-        margin-bottom: 15px;
-    }
-}
-        
     </style>
 </head>
 
@@ -319,7 +240,7 @@
                 </div>
                 <nav class="sb-nav">
                     <div class="nav-label">الصفحة الرئيسية</div>
-                    <div class="nav-item active" data-panel="hero"><span class="ico">🏠</span> Hero</div>
+                    <div class="nav-item active" data-panel="hero"><span class="ico">🏠</span> الهوية والهيرو</div>
                     <div class="nav-item" data-panel="services"><span class="ico">⚡</span> الخدمات</div>
                     <div class="nav-item" data-panel="tools"><span class="ico">🛠</span> Core Tools</div>
                     <div class="nav-item" data-panel="about"><span class="ico">👤</span> About Me</div>
@@ -341,8 +262,8 @@
             <main class="admin-main">
                 <div class="topbar">
                     <div>
-                        <h1 id="pTitle">Hero Section</h1>
-                        <p id="pSub">تعديل العنوان الرئيسي</p>
+                        <h1 id="pTitle">الهوية والهيرو</h1>
+                        <p id="pSub">تعديل الألوان، صورة الهيرو، والنصوص</p>
                     </div>
                     <button class="save-btn" id="saveBtn">💾 حفظ التغييرات</button>
                 </div>
@@ -353,12 +274,36 @@
                 </div>
 
                 <div class="panel active" id="panel-hero">
+                    
+                    <div class="card">
+                        <div class="card-head open" onclick="toggleCard(this)">
+                            <h3>🎨 الهوية البصرية (اللون والخلفية)</h3><span class="chevron">▼</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="f" style="background: rgba(64,82,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <label style="color:var(--blue); font-weight:bold;">لون الموقع الأساسي (Theme Color)</label>
+                                <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">سيتم تغيير اللون الأزرق في كامل الموقع (الأزرار، العناوين، الأيقونات) لهذا اللون.</p>
+                                <input type="color" id="themeColor" value="#4052FF" style="width: 80px; height: 45px; cursor: pointer; border: none; border-radius: 5px; padding: 0;">
+                            </div>
+
+                            <div class="f" style="background: rgba(64,82,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 0;">
+                                <label style="color:var(--blue); font-weight:bold;">صورة خلفية الهيرو (القسم العلوي)</label>
+                                <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">يفضل رفع صورة بصيغة PNG وبدون خلفية لدمجها مع التصميم الأسود.</p>
+                                <input type="file" id="heroImgInput" accept="image/*" onchange="uploadHeroBg(event)" style="padding: 0.5rem; background: #fff; border: 1px solid var(--border); border-radius: 8px;">
+                                <div style="margin-top: 15px;">
+                                    <img id="heroBgPreview" style="max-width: 250px; display: none; background: #000; padding: 10px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #333;">
+                                    <button onclick="removeHeroBg()" type="button" class="del-btn" style="color: var(--red); border-color: var(--red);">🗑 إزالة الصورة والعودة للأساسي</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-head open" onclick="toggleCard(this)">
                             <h3>🏠 النصوص الرئيسية</h3><span class="chevron">▼</span>
                         </div>
                         <div class="card-body">
-                            <div class="f"><label>السطر الأول — اسمك (يظهر بالأزرق)</label><input id="heroGreeting" type="text" /></div>
+                            <div class="f"><label>السطر الأول — اسمك (يظهر باللون الأساسي)</label><input id="heroGreeting" type="text" /></div>
                             <div class="fg2">
                                 <div class="f"><label>العنوان الكبير — السطر الأول</label><input id="heroTitle1" type="text" /></div>
                                 <div class="f"><label>العنوان الكبير — السطر الثاني</label><input id="heroTitle2" type="text" /></div>
@@ -501,8 +446,4 @@
     <script src="Admin script.js"></script>
 </body>
 
-
 </html>
-
-
-
