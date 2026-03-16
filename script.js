@@ -1,4 +1,4 @@
-import { db, doc, getDoc } from "./Firebase config.js";
+import { db, doc, getDoc, collection, getDocs } from "./Firebase config.js";
 
 // ==========================================
 // 1. نظام الترجمة (Translation System)
@@ -45,12 +45,10 @@ async function loadSiteData() {
         if (docSnap.exists()) {
             const data = docSnap.data();
 
-            // --- 🎨 تحديث لون الموقع (الثيم) من الأدمين ---
             if (data.theme && data.theme.accentColor) {
                 document.documentElement.style.setProperty('--accent-blue', data.theme.accentColor);
             }
 
-            // --- 📌 تحديث العناوين الرئيسية للأقسام ---
             if (data.titles) {
                 const elAbout = document.getElementById('aboutTitle');
                 if (elAbout && data.titles.about) elAbout.textContent = data.titles.about;
@@ -65,7 +63,6 @@ async function loadSiteData() {
                 if (elBlog && data.titles.blog) elBlog.textContent = data.titles.blog;
             }
 
-            // --- أ. تحديث قسم About Me ---
             if (data.about && data.about.length > 0) {
                 const aboutParagraphs = document.querySelectorAll('.about-right p');
                 const aboutTitles = document.querySelectorAll('.about-left h3');
@@ -75,7 +72,6 @@ async function loadSiteData() {
                 }
             }
 
-            // --- ب. تحديث قصص النجاح (Portfolio) مع دعم الصور ---
             if (data.stories && data.stories.length > 0) {
                 const track = document.getElementById('success-track');
                 if (track) {
@@ -103,7 +99,6 @@ async function loadSiteData() {
                 }
             }
 
-            // --- ج. تحديث الأدوات (Core Tools) ---
             if (data.tools && data.tools.length > 0) {
                 const toolsContainer = document.querySelector('.tools-icons');
                 if (toolsContainer) {
@@ -127,7 +122,6 @@ async function loadSiteData() {
                 }
             }
 
-            // --- د. تحديث القسم الرئيسي (Hero) وخلفيته ---
             if (data.hero) {
                 const heroGreeting = document.getElementById('heroGreeting');
                 const heroTitle = document.getElementById('heroTitle');
@@ -143,7 +137,6 @@ async function loadSiteData() {
                 }
             }
 
-            // --- هـ. تحديث قسم الخدمات (Services) ---
             if (data.services && data.services.length > 0) {
                 const servicesRow = document.getElementById('servicesRow');
                 if (servicesRow) {
@@ -158,7 +151,6 @@ async function loadSiteData() {
                 }
             }
 
-            // --- و. تحديث معلومات التواصل (Footer & Social Links) ---
             if (data.footer) {
                 const footerTitleText = document.querySelector('#footerTitleText');
                 if (footerTitleText && data.footer.title) footerTitleText.textContent = data.footer.title;
@@ -191,38 +183,47 @@ async function loadSiteData() {
 }
 
 // ==========================================
-// 3. جلب آخر المقالات للمدونة
+// 3. جلب آخر المقالات للمدونة (مباشرة من فايربيس)
 // ==========================================
-function loadBlogPreviews() {
-    const posts = JSON.parse(localStorage.getItem('layan_blog_posts') || '[]');
+async function loadBlogPreviews() {
     const blogGrid = document.getElementById('blogPreviewGrid');
-
     if (!blogGrid) return;
-    blogGrid.innerHTML = "";
+    blogGrid.innerHTML = "<p style='color:#888; text-align:center; width:100%;'>⏳ جاري تحميل المقالات...</p>";
 
-    if (posts.length === 0) {
-        const emptyMsg = currentLang === 'ar' ? 'لا توجد مقالات حتى الآن.' : 'No articles yet.';
-        blogGrid.innerHTML = `<p style='color:#888; text-align:center; width:100%;'>${emptyMsg}</p>`;
-        return;
+    try {
+        const querySnapshot = await getDocs(collection(db, "blog_posts"));
+        let posts = [];
+        querySnapshot.forEach((doc) => posts.push(doc.data()));
+
+        if (posts.length === 0) {
+            const emptyMsg = currentLang === 'ar' ? 'لا توجد مقالات حتى الآن.' : 'No articles yet.';
+            blogGrid.innerHTML = `<p style='color:#888; text-align:center; width:100%;'>${emptyMsg}</p>`;
+            return;
+        }
+
+        posts.sort((a, b) => b.id - a.id);
+        const recentPosts = posts.slice(0, 4);
+        blogGrid.innerHTML = "";
+
+        recentPosts.forEach((post) => {
+            const coverSrc = post.coverImage || 'images/brain.png';
+
+            blogGrid.innerHTML += `
+                <div class="blog-card" onclick="window.location.href='blog.html'" style="cursor:pointer; min-width: 300px; flex-shrink: 0;">
+                    <div class="blog-visual-area">
+                        <div class="soft-green-circle"></div>
+                        <img src="${coverSrc}" alt="Cover" class="brain-img" style="width: 140px; height: 140px; object-fit: contain; z-index: 2; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));" onerror="this.src='images/brain.png'">
+                    </div>
+                    <div class="blog-card-body">
+                        <h3 class="highlight-percent" style="font-size: 1.4rem;">${post.title}</h3>
+                        <p class="study-text">${post.excerpt || ''}</p>
+                    </div>
+                </div>`;
+        });
+    } catch (error) {
+        console.error("Error loading blogs:", error);
+        blogGrid.innerHTML = "<p style='color:red; text-align:center; width:100%;'>تعذر تحميل المقالات من الخادم.</p>";
     }
-
-    const recentPosts = posts.slice(0, 4);
-
-    recentPosts.forEach((post) => {
-        const coverSrc = post.coverImage || 'images/brain.png';
-
-        blogGrid.innerHTML += `
-            <div class="blog-card" onclick="window.location.href='blog.html'" style="cursor:pointer; min-width: 300px; flex-shrink: 0;">
-                <div class="blog-visual-area">
-                    <div class="soft-green-circle"></div>
-                    <img src="${coverSrc}" alt="Cover" class="brain-img" style="width: 140px; height: 140px; object-fit: contain; z-index: 2; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));" onerror="this.src='images/brain.png'">
-                </div>
-                <div class="blog-card-body">
-                    <h3 class="highlight-percent" style="font-size: 1.4rem;">${post.title}</h3>
-                    <p class="study-text">${post.excerpt || ''}</p>
-                </div>
-            </div>`;
-    });
 }
 
 // 1. تحديد الكلمات حسب اللغة

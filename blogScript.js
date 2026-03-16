@@ -1,13 +1,11 @@
 /* ==========================================
-   BLOG SCRIPT — READ ONLY (Public)
+   BLOG SCRIPT — Firebase Live Version
    Layan Alamrah Portfolio
    ========================================== */
+import { db, collection, getDocs } from "./Firebase config.js";
 
-// ==========================================
-// 1. المتغيرات والقاموس (State & Localization)
-// ==========================================
 let currentLang = localStorage.getItem('layan_lang') || 'en';
-let posts = JSON.parse(localStorage.getItem('layan_blog_posts') || '[]');
+let posts = [];
 
 const blogDict = {
     en: {
@@ -42,9 +40,6 @@ function applyBlogTranslations() {
     document.getElementById('langToggle').innerHTML = dict.langToggle;
 }
 
-// ==========================================
-// 2. عرض المقالات (Render Posts)
-// ==========================================
 function renderPosts() {
     const grid = document.getElementById('postsGrid');
     const emptyState = document.getElementById('emptyState');
@@ -63,7 +58,6 @@ function renderPosts() {
         const card = document.createElement('div');
         card.className = 'post-card';
         
-        // تنسيق التاريخ بناءً على اللغة
         const formattedDate = new Date(post.id).toLocaleDateString(currentLang === 'ar' ? 'ar-SA' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         
         card.innerHTML = `
@@ -87,9 +81,6 @@ function renderPosts() {
     });
 }
 
-// ==========================================
-// 3. قراءة المقال (Open Post View)
-// ==========================================
 function openPost(index) {
     const post = posts[index];
     const article = document.getElementById('articleContent');
@@ -123,9 +114,6 @@ function openPost(index) {
     document.getElementById('postViewModal').classList.add('active');
 }
 
-// ==========================================
-// 4. معالجة النصوص (Markdown Parser)
-// ==========================================
 function parseContent(text) {
     if (!text) return ''; 
     let html = ''; 
@@ -157,12 +145,20 @@ function formatInline(text) {
                .replace(/!\[([^\]]*)\]\((.*?)\)/g, (match, alt, src) => `<img src="${src}" alt="${alt || 'Image'}" style="max-width:100%; height:auto; border-radius:12px; margin: 1.5rem 0;">`);
 }
 
-// ==========================================
-// 5. التشغيل الأولي (Initialization)
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     applyBlogTranslations(); 
-    renderPosts();
+    
+    const grid = document.getElementById('postsGrid');
+    if(grid) grid.innerHTML = "<p style='text-align:center; color:#888; width:100%; margin-top:2rem;'>⏳ جاري تحميل المقالات...</p>";
+    
+    try {
+        const querySnapshot = await getDocs(collection(db, "blog_posts"));
+        querySnapshot.forEach((doc) => posts.push(doc.data()));
+        posts.sort((a, b) => b.id - a.id);
+        renderPosts();
+    } catch(e) {
+        if(grid) grid.innerHTML = "<p style='text-align:center; color:red; width:100%;'>❌ تعذر تحميل المقالات.</p>";
+    }
     
     document.getElementById('langToggle')?.addEventListener('click', () => {
         currentLang = currentLang === 'en' ? 'ar' : 'en';
