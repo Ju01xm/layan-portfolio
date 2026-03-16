@@ -1,36 +1,17 @@
 /* ==========================================
    ADMIN SCRIPT — Layan Alamrah Portfolio
-   Fixed Image Upload using Firebase Storage
+   Bilingual EN/AR editor + Smart Sync (Images/Colors/Links)
    ========================================== */
 
 // ==========================================
 // 1. إعدادات قاعدة البيانات (Firebase)
 // ==========================================
-let db = null;
-let storage = null;
-
-let firestoreDoc = null;
-let getDoc = null;
-let setDoc = null;
-
-let ref = null;
-let uploadBytes = null;
-let getDownloadURL = null;
+let db = null, firestoreDoc = null, getDoc = null, setDoc = null;
 
 async function loadFirebase() {
     try {
-
-        const { initializeApp } = await import(
-            "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"
-        );
-
-        const fs = await import(
-            "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"
-        );
-
-        const st = await import(
-            "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js"
-        );
+        const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+        const fs = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
 
         const firebaseConfig = {
             apiKey: "AIzaSyBIxhqqk425SFWQXe6Y3KThpV83v5CJvLA",
@@ -42,24 +23,14 @@ async function loadFirebase() {
         };
 
         const app = initializeApp(firebaseConfig);
-
         db = fs.getFirestore(app);
         firestoreDoc = fs.doc;
         getDoc = fs.getDoc;
         setDoc = fs.setDoc;
-
-        storage = st.getStorage(app);
-        ref = st.ref;
-        uploadBytes = st.uploadBytes;
-        getDownloadURL = st.getDownloadURL;
-
         return true;
-
     } catch (e) {
-
-        console.warn("Firebase load failed:", e.message);
+        console.warn('Firebase load failed:', e.message);
         return false;
-
     }
 }
 
@@ -351,52 +322,20 @@ function renderHero() {
 }
 
 // 💡 رفع صورة الهيرو للغتين معاً
-// ==========================================
-// Upload Hero Background (Firebase Storage)
-// ==========================================
-window.uploadHeroBg = async function (e) {
-
-    const file = e.target.files[0];
-    if (!file) return;
-
-    if (!storage) {
-        toast("❌ Firebase Storage غير متصل", "err");
-        return;
-    }
-
-    try {
-
-        toast("⏳ جاري رفع الصورة...", "");
-
-        const filePath =
-            "hero/" + Date.now() + "_" + file.name;
-
-        const storageRef = ref(storage, filePath);
-
-        await uploadBytes(storageRef, file);
-
-        const url = await getDownloadURL(storageRef);
-
-        content.en.hero.bgImage = url;
-        content.ar.hero.bgImage = url;
-
-        const preview = document.getElementById("heroBgPreview");
-
-        if (preview) {
-
-            preview.src = url;
-            preview.style.display = "block";
-
+window.uploadHeroBg = function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => { 
+        const imgData = event.target.result;
+        content.en.hero.bgImage = imgData; 
+        content.ar.hero.bgImage = imgData; 
+        
+        if (document.getElementById('heroBgPreview')) {
+            document.getElementById('heroBgPreview').src = imgData;
+            document.getElementById('heroBgPreview').style.display = 'block';
         }
-
-        toast("✅ تم رفع الصورة بنجاح", "ok");
-
-    } catch (err) {
-
-        console.error(err);
-        toast("❌ فشل رفع الصورة", "err");
-
-    }
+    };
+    reader.readAsDataURL(file);
 };
 window.removeHeroBg = function() {
     content.en.hero.bgImage = '';
