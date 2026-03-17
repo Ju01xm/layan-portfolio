@@ -354,24 +354,60 @@ async function uploadToStorage(file, folder) {
 }
 
 // ==========================================
-// رفع صورة الهيرو
+// رفع صورة الهيرو — base64 مضغوطة
 // ==========================================
-window.uploadHeroBg = async function (e) {
+window.uploadHeroBg = function (e) {
     const file = e.target.files[0];
     if (!file) return;
-    if (!storage) { toast("❌ Firebase Storage غير متصل", "err"); return; }
-    try {
-        toast("⏳ جاري رفع الصورة...", "");
-        const url = await uploadToStorage(file, "hero");
-        content.en.hero.bgImage = url;
-        content.ar.hero.bgImage = url;
+
+    toast("⏳ جاري معالجة الصورة...", "");
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = async () => {
+        URL.revokeObjectURL(objectUrl);
+
+        // ✅ ضغط الصورة لتكون أقل من 800KB
+        const canvas = document.createElement('canvas');
+        const MAX_W = 1400;
+        let w = img.width, h = img.height;
+        if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+
+        // جرب جودة 0.8 أولاً، لو زادت عن 800KB اخفض تدريجياً
+        let quality = 0.8;
+        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+        while (dataUrl.length > 800000 && quality > 0.3) {
+            quality -= 0.1;
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        content.en.hero.bgImage = dataUrl;
+        content.ar.hero.bgImage = dataUrl;
+
         const preview = document.getElementById("heroBgPreview");
-        if (preview) { preview.src = url; preview.style.display = "block"; }
-        toast("✅ تم رفع الصورة بنجاح", "ok");
-    } catch (err) {
-        console.error(err);
-        toast("❌ فشل رفع الصورة", "err");
-    }
+        if (preview) { preview.src = dataUrl; preview.style.display = "block"; }
+
+        // ✅ حفظ تلقائي بعد المعالجة
+        if (db) {
+            try {
+                toast("⏳ جاري الحفظ...", "");
+                await Promise.all([
+                    setDoc(firestoreDoc(db, 'site', 'content_en'), content.en),
+                    setDoc(firestoreDoc(db, 'site', 'content_ar'), content.ar),
+                ]);
+                toast("✅ تم رفع الصورة وحفظها!", "ok");
+            } catch (err) {
+                toast("❌ فشل الحفظ: " + err.message, "err");
+            }
+        } else {
+            toast("✅ الصورة جاهزة — اضغطي حفظ", "ok");
+        }
+    };
+
+    img.src = objectUrl;
 };
 
 window.removeHeroBg = function () {
