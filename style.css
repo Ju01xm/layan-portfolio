@@ -847,11 +847,11 @@ nav a:hover {
     /* تكبير خط الآلة الكاتبة و التنسيق الجديد */
     .hero h2.typewriter-h2 {
         font-size: 30.5px !important;
-        margin-bottom: 30px !important;
+        margin-bottom: 10px !important;
         display: block !important;
         width: 100% !important;
         text-align: left !important;
-        line-height: 1.5 !important;
+        line-height: 1.3 !important;
         padding-top: 2px !important;
     }
 
@@ -868,7 +868,7 @@ nav a:hover {
     #static-expertise {
         width: 100%;
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 0px;
     }
 
     .hero-actions {
@@ -877,8 +877,8 @@ nav a:hover {
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
         gap: 15px !important;
-        margin-bottom: 15px !important;
-        margin-top: -5px !important;
+        margin-bottom: 8px !important;
+        margin-top: 10px !important;
     }
 
     .btn-outline {
@@ -897,8 +897,8 @@ nav a:hover {
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 10px 5px !important;
-        margin-top: 15px !important;
+        gap: 8px 5px !important;
+        margin-top: 8px !important;
         margin-bottom: -5px !important;
         width: 100% !important;
     }
@@ -918,10 +918,10 @@ nav a:hover {
         flex-direction: column !important;
         align-items: flex-start !important;
         padding: 0 5px !important;
-        margin-top: 10px !important;
+        margin-top: 2px !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        padding-top: 10px !important;
+        padding-top: 5px !important;
     }
 
     html[dir="rtl"] .tools-row,
@@ -932,12 +932,12 @@ nav a:hover {
     .tools-row h3 {
         width: 100% !important;
         font-size: 28px !important;
-        margin-bottom: -5px !important;
+        margin-bottom: -30px !important;
         color: rgba(255, 255, 255, 0.8) !important;
         letter-spacing: 1px;
         text-align: left !important;
-        padding-top: 0px !important;
-        padding-bottom: -5px !important;
+        padding-top: 10px !important;
+        padding-bottom: 0px !important;
     }
 
     html[dir="rtl"] .tools-row h3,
