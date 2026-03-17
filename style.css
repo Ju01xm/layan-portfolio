@@ -1035,8 +1035,8 @@ nav a:hover {
     }
 
     .success-stories {
-        padding-left: 2 !important;
-        padding-right: 2 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     .prev-btn {
@@ -1047,6 +1047,6 @@ nav a:hover {
     /* 4. تثبيت السهم اليمين على الحافة */
     .next-btn {
         right: 0px !important;
-        padding: 5px !important;
+        padding: 2px !important;
     }
 }
