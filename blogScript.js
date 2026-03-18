@@ -85,12 +85,31 @@ function renderPosts() {
     });
 }
 
+// ✅ تحويل Markdown البسيط إلى HTML
+function markdownToHtml(text) {
+    if (!text) return '';
+    // لو المحتوى يحتوي على tags HTML فعلية، أرجعه مباشرة (من contenteditable)
+    if (/<[a-z][\s\S]*>/i.test(text)) return text;
+    
+    return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')   // **bold**
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')                // *italic*
+        .replace(/^---$/gm, '<hr>')                          // ---
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')              // ## h2
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')             // ### h3
+        .replace(/^- (.+)$/gm, '<li>$1</li>')               // - list
+        .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')         // wrap ul
+        .replace(/\n\n+/g, '</p><p>')                        // فقرات
+        .replace(/^(?!<)(.+)$/gm, '<p>$1</p>');             // أسطر عادية
+}
+
 function openPost(index) {
     const post = posts[index];
     const article = document.getElementById('articleContent');
     
-    // ✅ عرض المحتوى حسب اللغة
-    const htmlContent = currentLang === 'ar' && post.contentAr ? post.contentAr : (post.content || '');
+    // ✅ عرض المحتوى حسب اللغة + تحويل markdown إذا لزم
+    const rawContent = currentLang === 'ar' && post.contentAr ? post.contentAr : (post.content || '');
+    const htmlContent = markdownToHtml(rawContent);
     const excerpt = currentLang === 'ar' && post.excerptAr ? post.excerptAr : (post.excerpt || '');
     const title = currentLang === 'ar' && post.titleAr ? post.titleAr : (post.title || '');
     
