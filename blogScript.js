@@ -85,22 +85,19 @@ function renderPosts() {
     });
 }
 
-// ✅ تحويل Markdown البسيط إلى HTML
+// ✅ تحويل Markdown داخل HTML
 function markdownToHtml(text) {
     if (!text) return '';
-    // لو المحتوى يحتوي على tags HTML فعلية، أرجعه مباشرة (من contenteditable)
-    if (/<[a-z][\s\S]*>/i.test(text)) return text;
-    
+
+    // تحويل markdown حتى لو المحتوى يحتوي HTML
     return text
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')   // **bold**
-        .replace(/\*(.+?)\*/g, '<em>$1</em>')                // *italic*
-        .replace(/^---$/gm, '<hr>')                          // ---
-        .replace(/^## (.+)$/gm, '<h2>$1</h2>')              // ## h2
-        .replace(/^### (.+)$/gm, '<h3>$1</h3>')             // ### h3
-        .replace(/^- (.+)$/gm, '<li>$1</li>')               // - list
-        .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')         // wrap ul
-        .replace(/\n\n+/g, '</p><p>')                        // فقرات
-        .replace(/^(?!<)(.+)$/gm, '<p>$1</p>');             // أسطر عادية
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/^---$/gm, '<hr>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>');
 }
 
 function openPost(index) {
