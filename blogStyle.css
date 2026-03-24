@@ -425,6 +425,13 @@ a {
     padding-right: 1rem;
 }
 
+html[dir="ltr"] .article-excerpt {
+    border-right: none;
+    border-left: 3px solid var(--accent-blue);
+    padding-right: 0;
+    padding-left: 1rem;
+}
+
 .article-divider {
     height: 1px;
     background: linear-gradient(to left, transparent, #ddd, transparent);
@@ -432,7 +439,7 @@ a {
 }
 
 /* ==========================================
-   ✨ تنسيقات نصوص المقال المحدثة (أصغر قليلاً ومتناسقة) ✨
+   ✨ تنسيقات نصوص المقال المحدثة والمضبوطة ✨
    ========================================== */
 .newsletter-content {
     font-size: 0.95rem; /* تصغير الخط الإنجليزي قليلاً */
@@ -483,7 +490,7 @@ html[dir="rtl"] .newsletter-content {
 .newsletter-content b {
     font-weight: 700;
     color: #000;
-    font-size: 1.15em !important; /* زيادة حجم الخط البولد 6% ليتساوى بصرياً مع الخط العادي */
+    font-size: 1.15em !important; /* زيادة حجم الخط البولد 15% ليتساوى بصرياً مع الخط العادي */
 }
 
 .newsletter-content em {
@@ -574,18 +581,85 @@ html[dir="rtl"] .newsletter-content blockquote {
 }
 
 /* ==========================================
-   7. التجاوب مع الشاشات (Responsive)
+   7. التجاوب مع الشاشات (Responsive) - تم التحديث للجوال
    ========================================== */
-@media (max-width: 600px) {
-    .newsletter-article {
-        padding: 1.5rem 1.2rem 3rem;
+@media (max-width: 768px) {
+    /* 🌟 الحل السحري لتصغير كل شيء في الجوال بشكل متناسق 🌟 */
+    html {
+        font-size: 16px !important; 
+    }
+
+    .blog-header {
+        padding: 1rem 5%;
+    }
+
+    .blog-hero {
+        padding: 3rem 5% 2rem;
+        border-radius: 0 0 30px 30px;
     }
 
     .posts-grid {
         grid-template-columns: 1fr;
+        gap: 1.2rem;
     }
 
-    .blog-header {
-        padding: 1rem 4%;
+    /* إصلاح محاذاة النص في البطاقات */
+    .post-card, .card-body {
+        text-align: start !important;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* 🌟 تحسين النافذة المنبثقة لتفتح من الأسفل وتستغل الشاشة 🌟 */
+    .modal-overlay {
+        padding: 0;
+        align-items: flex-end; 
+    }
+
+    .post-view-modal {
+        max-height: 92vh;
+        border-radius: 25px 25px 0 0;
+        width: 100%;
+    }
+
+    /* تثبيت زر الإغلاق في الأعلى عند النزول */
+    .close-post-view {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        border-radius: 25px 25px 0 0;
+        z-index: 10;
+        padding: 1.2rem 1.5rem;
+        font-size: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .newsletter-article {
+        padding: 1.5rem 1.2rem 3rem;
+        text-align: start !important;
+    }
+
+    /* تقليل التباعد بين الأسطر وتقريب النصوص في الجوال */
+    .newsletter-content {
+        line-height: 1.8 !important; 
+    }
+    
+    html[dir="rtl"] .newsletter-content {
+        line-height: 1.85 !important;
+    }
+
+    .newsletter-content p,
+    .newsletter-content div,
+    .newsletter-content span {
+        margin-bottom: 1rem;
+    }
+
+    /* تعديل الخط الجانبي الأزرق للمقتطف في الجوال */
+    .article-excerpt {
+        font-size: 1.15rem;
+        padding-right: 0.8rem; 
+        line-height: 1.6;
     }
 }
