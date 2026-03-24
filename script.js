@@ -135,6 +135,11 @@ async function loadSiteData() {
                     heroSection.style.setProperty('background-size', 'cover', 'important');
                     heroSection.style.setProperty('background-position', 'center top', 'important');
                 }
+
+                // --------- حفظ الكلمات المتحركة في متغير ---------
+                if (data.hero.typewriter && data.hero.typewriter.trim() !== "") {
+                    window.currentTypewriterPhrases = data.hero.typewriter.split(',').map(item => item.trim()).filter(item => item !== "");
+                }
             }
 
             if (data.services && data.services.length > 0) {
@@ -229,7 +234,7 @@ async function loadBlogPreviews() {
     }
 }
 
-// 1. تحديد الكلمات حسب اللغة
+// 1. تحديد الكلمات حسب اللغة ديناميكياً من لوحة التحكم
 function getPhrases() {
     const isArabic = document.documentElement.dir === 'rtl' || localStorage.getItem('layan_lang') === 'ar' || document.body.classList.contains('rtl');
     
@@ -238,6 +243,12 @@ function getPhrases() {
         staticText.textContent = isArabic ? staticText.getAttribute('data-ar') : staticText.getAttribute('data-en');
     }
 
+    // قراءة الكلمات القادمة من لوحة التحكم (إن وجدت)
+    if (window.currentTypewriterPhrases && window.currentTypewriterPhrases.length > 0) {
+        return window.currentTypewriterPhrases;
+    }
+
+    // الكلمات الافتراضية
     return isArabic ? [
         "إدارة العلامات التجارية",
         "التواصل المؤسسي",
