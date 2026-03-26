@@ -806,20 +806,37 @@
                             <h3>🏠 النصوص الرئيسية</h3><span class="chevron">▼</span>
                         </div>
                         <div class="card-body">
-                            <div class="f"><label>السطر الأول — اسمك (يظهر باللون الأساسي)</label><input
-                                    id="heroGreeting" type="text" /></div>
-                            <div class="fg2">
-                                <div class="f"><label>العنوان الكبير — السطر الأول</label><input id="heroTitle1"
-                                        type="text" /></div>
-                                <div class="f"><label>العنوان الكبير — السطر الثاني</label><input id="heroTitle2"
-                                        type="text" /></div>
+                            <div class="f">
+                                <label>السطر الأول — اسمك (يظهر باللون الأساسي)</label>
+                                <input id="heroGreeting" type="text" />
                             </div>
-                            <div class="f" style="background: rgba(64,82,255,0.05); padding: 15px; border-radius: 8px;">
-                                <label style="color:var(--blue); font-weight:bold;">الكلمات المتحركة (افصلي بينها بفاصلة إنجليزية , )</label>
-                                <input id="heroTypewriter" type="text" placeholder="مثال: التسويق, صناعة المحتوى, ..." />
+
+                            <div class="fg2"
+                                style="background: rgba(64,82,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <div class="f">
+                                    <label style="color:var(--blue); font-weight:bold;">🇬🇧 النص الثابت قبل الكلمات
+                                        المتحركة — English</label>
+                                    <input id="heroStaticEN" type="text" dir="ltr" placeholder="I have Expertise in" />
+                                </div>
+                                <div class="f">
+                                    <label style="color:var(--blue); font-weight:bold;">🇸🇦 النص الثابت قبل الكلمات
+                                        المتحركة — العربي</label>
+                                    <input id="heroStaticAR" type="text" dir="rtl" placeholder="لدي خبرة في" />
+                                </div>
                             </div>
-                            
-                            <div class="f" style="margin-top: 15px;"><label>نص زر Get in Touch</label><input id="heroBtnText" type="text" /></div>
+
+                            <div class="f"
+                                style="background: rgba(64,82,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <label style="color:var(--blue); font-weight:bold;">الكلمات المتحركة (افصلي بينها بفاصلة
+                                    إنجليزية , )</label>
+                                <input id="heroTypewriter" type="text"
+                                    placeholder="مثال: التسويق, صناعة المحتوى, ..." />
+                            </div>
+
+                            <div class="f" style="margin-top: 15px;">
+                                <label>نص زر Get in Touch</label>
+                                <input id="heroBtnText" type="text" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -942,8 +959,10 @@
                         </div>
                         <div class="card-body">
                             <div class="fg2">
-                                <div class="f"><label>🇬🇧 عنوان المقال — English *</label><input type="text" id="postTitle" dir="ltr" placeholder="Article title in English..." /></div>
-                                <div class="f"><label>🇸🇦 عنوان المقال — العربي</label><input type="text" id="postTitleAr" dir="rtl" placeholder="عنوان المقال بالعربي..." /></div>
+                                <div class="f"><label>🇬🇧 عنوان المقال — English *</label><input type="text"
+                                        id="postTitle" dir="ltr" placeholder="Article title in English..." /></div>
+                                <div class="f"><label>🇸🇦 عنوان المقال — العربي</label><input type="text"
+                                        id="postTitleAr" dir="rtl" placeholder="عنوان المقال بالعربي..." /></div>
                             </div>
                             <div class="fg2">
                                 <div class="f"><label>الوسم / التصنيف</label><input type="text" id="postTag"
@@ -957,21 +976,32 @@
                                     style="max-width: 150px; display: none; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd;" />
                             </div>
                             <div class="fg2">
-                                <div class="f"><label>مقتطف قصير — English *</label><textarea id="postExcerpt" rows="2" dir="ltr" placeholder="Short excerpt in English..."></textarea></div>
-                                <div class="f"><label>مقتطف قصير — العربي</label><textarea id="postExcerptAr" rows="2" dir="rtl" placeholder="مقتطف قصير بالعربي..."></textarea></div>
+                                <div class="f"><label>مقتطف قصير — English *</label><textarea id="postExcerpt" rows="2"
+                                        dir="ltr" placeholder="Short excerpt in English..."></textarea></div>
+                                <div class="f"><label>مقتطف قصير — العربي</label><textarea id="postExcerptAr" rows="2"
+                                        dir="rtl" placeholder="مقتطف قصير بالعربي..."></textarea></div>
                             </div>
 
                             <!-- محرر الإنجليزي -->
                             <div class="f">
-                                <label style="color:var(--blue); font-weight:bold;">🇬🇧 المحتوى الكامل — English</label>
-                                <div style="display:flex; gap:5px; margin-bottom:5px; background:#f5f5f5; padding:5px; border-radius:8px; flex-wrap:wrap;">
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('h2','postContent')">H2</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('h3','postContent')">H3</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('bold','postContent')"><b>B</b></button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('bullet','postContent')">• List</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('divider','postContent')">— Divider</button>
+                                <label style="color:var(--blue); font-weight:bold;">🇬🇧 المحتوى الكامل —
+                                    English</label>
+                                <div
+                                    style="display:flex; gap:5px; margin-bottom:5px; background:#f5f5f5; padding:5px; border-radius:8px; flex-wrap:wrap;">
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('h2','postContent')">H2</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('h3','postContent')">H3</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('bold','postContent')"><b>B</b></button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('bullet','postContent')">• List</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('divider','postContent')">— Divider</button>
                                     <input type="file" id="inlineImgUpload" accept="image/*" style="display:none">
-                                    <button type="button" class="del-btn" style="color:var(--blue);border-color:var(--blue);" onclick="document.getElementById('inlineImgUpload').click()">🖼 Image</button>
+                                    <button type="button" class="del-btn"
+                                        style="color:var(--blue);border-color:var(--blue);"
+                                        onclick="document.getElementById('inlineImgUpload').click()">🖼 Image</button>
                                 </div>
                                 <div id="postContent" contenteditable="true" dir="ltr"
                                     style="min-height:220px; padding:1rem; border:1px solid var(--border); border-radius:8px; outline:none; font-size:0.95rem; line-height:1.7; text-align:left;">
@@ -981,14 +1011,22 @@
                             <!-- محرر العربي -->
                             <div class="f">
                                 <label style="color:var(--blue); font-weight:bold;">🇸🇦 المحتوى الكامل — العربي</label>
-                                <div style="display:flex; gap:5px; margin-bottom:5px; background:#f5f5f5; padding:5px; border-radius:8px; flex-wrap:wrap;">
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('h2','postContentAr')">H2</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('h3','postContentAr')">H3</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('bold','postContentAr')"><b>B</b></button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('bullet','postContentAr')">• قائمة</button>
-                                    <button type="button" class="del-btn" onclick="insertBlogFormat('divider','postContentAr')">— فاصل</button>
+                                <div
+                                    style="display:flex; gap:5px; margin-bottom:5px; background:#f5f5f5; padding:5px; border-radius:8px; flex-wrap:wrap;">
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('h2','postContentAr')">H2</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('h3','postContentAr')">H3</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('bold','postContentAr')"><b>B</b></button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('bullet','postContentAr')">• قائمة</button>
+                                    <button type="button" class="del-btn"
+                                        onclick="insertBlogFormat('divider','postContentAr')">— فاصل</button>
                                     <input type="file" id="inlineImgUploadAr" accept="image/*" style="display:none">
-                                    <button type="button" class="del-btn" style="color:var(--blue);border-color:var(--blue);" onclick="document.getElementById('inlineImgUploadAr').click()">🖼 صورة</button>
+                                    <button type="button" class="del-btn"
+                                        style="color:var(--blue);border-color:var(--blue);"
+                                        onclick="document.getElementById('inlineImgUploadAr').click()">🖼 صورة</button>
                                 </div>
                                 <div id="postContentAr" contenteditable="true" dir="rtl"
                                     style="min-height:220px; padding:1rem; border:1px solid var(--border); border-radius:8px; outline:none; font-size:0.95rem; line-height:1.7; text-align:right;">

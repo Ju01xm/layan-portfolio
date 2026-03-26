@@ -140,6 +140,12 @@ async function loadSiteData() {
                 if (data.hero.typewriter && data.hero.typewriter.trim() !== "") {
                     window.currentTypewriterPhrases = data.hero.typewriter.split(',').map(item => item.trim()).filter(item => item !== "");
                 }
+
+                // ✅ النص الثابت قبل الكلمات المتحركة
+                if (data.hero.staticText && data.hero.staticText.trim() !== "") {
+                    const staticEl = document.getElementById('static-expertise');
+                    if (staticEl) staticEl.textContent = data.hero.staticText;
+                }
             }
 
             if (data.services && data.services.length > 0) {

@@ -79,7 +79,7 @@ const DEFAULTS = {
     en: {
         theme: { accentColor: '#4052FF' },
         titles: { about: 'ABOUT ME', success: 'SUCCESS STORIES', blog: 'MY BLOGS', tools: 'CORE TOOLS' },
-        hero: { greeting: "HI! I'M LAYAN ALAMRAH", title1: "I'M A BRAND & CORPORATE", title2: "COMMUNICATION PROFESSIONAL", btnText: "Get in Touch →", bgImage: "", typewriter: "Branding, Corporate Communication, Marketing, Content Creation" },
+        hero: { greeting: "HI! I'M LAYAN ALAMRAH", btnText: "Get in Touch →", bgImage: "", staticText: "I have Expertise in ", typewriter: "Branding, Corporate Communication, Marketing, Content Creation" },
         services: [
             { num: '#01', title: 'Brand\nManagement' }, { num: '#02', title: 'Content\nStrategy' },
             { num: '#03', title: 'Digital\nMarketing' }, { num: '#04', title: 'Event\nManagement' }, { num: '#05', title: 'Corporate\nCommunications' }
@@ -104,7 +104,7 @@ const DEFAULTS = {
     ar: {
         theme: { accentColor: '#4052FF' },
         titles: { about: 'نبذة عني', success: 'قصص النجاح', blog: 'المدونة', tools: 'الأدوات الأساسية' },
-        hero: { greeting: "مرحباً! أنا ليان العمرة", title1: "متخصصة في الاتصال", title2: "المؤسسي والعلامة التجارية", btnText: "تواصلي معي ←", bgImage: "", typewriter: "إدارة العلامات التجارية, التواصل المؤسسي, التسويق, صناعة المحتوى" },
+        hero: { greeting: "مرحباً! أنا ليان العمرة", btnText: "تواصلي معي ←", bgImage: "", staticText: "لدي خبرة في ", typewriter: "إدارة العلامات التجارية, التواصل المؤسسي, التسويق, صناعة المحتوى" },
         services: [
             { num: '#01', title: 'إدارة\nالعلامة التجارية' }, { num: '#02', title: 'استراتيجية\nالمحتوى' },
             { num: '#03', title: 'التسويق\nالرقمي' }, { num: '#04', title: 'إدارة\nالفعاليات' }, { num: '#05', title: 'الاتصالات\nالمؤسسية' }
@@ -283,11 +283,14 @@ function collectPanel() {
     switch (currentPanel) {
         case 'hero':
             c.hero.greeting = document.getElementById('heroGreeting').value;
-            c.hero.title1 = document.getElementById('heroTitle1').value;
-            c.hero.title2 = document.getElementById('heroTitle2').value;
             c.hero.btnText = document.getElementById('heroBtnText').value;
             if(document.getElementById('heroTypewriter')) {
                 c.hero.typewriter = document.getElementById('heroTypewriter').value;
+            }
+            // ✅ النص الثابت — يُحفظ لكل لغة منفصلة
+            if (document.getElementById('heroStaticEN')) {
+                content.en.hero.staticText = document.getElementById('heroStaticEN').value;
+                content.ar.hero.staticText = document.getElementById('heroStaticAR').value;
             }
             if (document.getElementById('themeColor')) {
                 const colorVal = document.getElementById('themeColor').value;
@@ -345,12 +348,16 @@ function renderAll() {
 
 function renderHero() {
     document.getElementById('heroGreeting').value = C().hero.greeting || '';
-    document.getElementById('heroTitle1').value = C().hero.title1 || '';
-    document.getElementById('heroTitle2').value = C().hero.title2 || '';
     document.getElementById('heroBtnText').value = C().hero.btnText || '';
     
     if(document.getElementById('heroTypewriter')) {
         document.getElementById('heroTypewriter').value = C().hero.typewriter || '';
+    }
+
+    // ✅ النص الثابت — يعرض قيم اللغتين دايماً
+    if (document.getElementById('heroStaticEN')) {
+        document.getElementById('heroStaticEN').value = content.en.hero?.staticText || '';
+        document.getElementById('heroStaticAR').value = content.ar.hero?.staticText || '';
     }
 
     if (document.getElementById('themeColor')) {

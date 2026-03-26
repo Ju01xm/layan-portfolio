@@ -450,7 +450,7 @@ html[dir="ltr"] .article-excerpt {
 /* 🌟 حجم الخط للغة العربية 🌟 */
 html[dir="rtl"] .newsletter-content {
     font-size: 1rem; /* تصغير الخط العربي ليكون أرتب */
-    line-height: 2.1;
+    line-height: 1.5;
 }
 
 /* 🌟🌟 إجبار النصوص المنسوخة على أخذ خط الموقع 🌟🌟 */
@@ -459,10 +459,15 @@ html[dir="rtl"] .newsletter-content {
     font-family: 'Ara Hamah', sans-serif !important;
 }
 
-.newsletter-content p,
+.newsletter-content p {
+    margin-bottom: 1rem;
+    font-size: inherit !important; 
+    line-height: inherit !important;
+}
+
+/* ✅ div و span من contenteditable — بدون margin عشان ما تصير مسافات زايدة */
 .newsletter-content div,
 .newsletter-content span {
-    margin-bottom: 1.3rem;
     font-size: inherit !important; 
     line-height: inherit !important;
 }
@@ -643,7 +648,7 @@ html[dir="rtl"] .newsletter-content blockquote {
 
     /* تقليل التباعد بين الأسطر وتقريب النصوص في الجوال */
     .newsletter-content {
-        line-height: 1.8 !important; 
+        line-height: 1.2 !important; 
     }
     
     html[dir="rtl"] .newsletter-content {
