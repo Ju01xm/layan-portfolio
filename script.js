@@ -265,11 +265,6 @@ async function loadBlogPreviews() {
 function getPhrases() {
     const isArabic = document.documentElement.dir === 'rtl' || localStorage.getItem('layan_lang') === 'ar' || document.body.classList.contains('rtl');
     
-    const staticText = document.getElementById('static-expertise');
-    if(staticText) {
-        staticText.textContent = isArabic ? staticText.getAttribute('data-ar') : staticText.getAttribute('data-en');
-    }
-
     if (window.currentTypewriterPhrases && window.currentTypewriterPhrases.length > 0) {
         return window.currentTypewriterPhrases;
     }
